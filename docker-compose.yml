@@ -1,0 +1,8 @@
+services:
+  app:
+    container_name: thriftyfoods-app
+    image: sanx007/thriftyfoods:latest
+    build: .
+    ports:
+      - "3000:3000"
+    restart: unless-stopped

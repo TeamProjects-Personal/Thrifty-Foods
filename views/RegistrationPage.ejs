@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thrifty Foods - Create Account</title>
+  <link rel="stylesheet" href="/public/RegForm.css">
+</head>
+<body>
+
+  <div class="registration-container">
+    <!-- Logo -->
+    <div class="logo">
+      <h1>Thrifty Foods</h1>
+      <p>Fresh • Affordable • Reliable</p>
+    </div>
+
+    <h2>Create Your Account</h2>
+
+    <form id="registrationForm" method="post">
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="you@example.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="+91 98765 43210" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="password-container">
+          <input type="password" id="password" placeholder="Create a strong password" required>
+          <span class="toggle-password" onclick="togglePassword()">Show</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="userType">I am registering as</label>
+        <select id="userType" required>
+          <option value="">Select User Type</option>
+          <option value="customer">Customer</option>
+          <option value="vendor">Vendor / Seller</option>
+          <option value="delivery">Delivery Partner</option>
+        </select>
+      </div>
+
+      <button type="submit" >Create Account</button>
+    </form>
+
+    <div class="footer-text">
+      Already have an account? <a href="#">Login here</a>
+    </div>
+  </div>
+  <script>
+    function RegistrationForm() {
+    const fullName = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const userType = document.getElementById('userType').value;
+
+    if (!fullName || !email || !phone || !password || !confirmPassword || !userType) {
+      alert("Please fill in all the fields");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    if (password.length < 6) {
+      alert("Password must be at least 6 characters long");
+      return;
+    }
+
+    alert("Registration Successful!\n\nWelcome to Thrifty Foods, " + fullName + "!\nYou registered as: " + userType);
+
+
+    document.getElementById('registrationForm').reset();
+  }
+
+
+  function togglePassword() {
+    const pwdField = document.getElementById('password');
+    const toggleBtn = document.querySelector('.toggle-password');
+
+    if (pwdField.type === "password") {
+      pwdField.type = "text";
+      toggleBtn.textContent = "Hide";
+    } else {
+      pwdField.type = "password";
+      toggleBtn.textContent = "Show";
+    }
+  }
+
+
+  document.getElementById('registrationForm').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      RegistrationForm();
+    }
+  });
+  </script>
+</body>
+</html>
