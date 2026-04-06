@@ -157,3 +157,12 @@ a {
         display: none;
     }
 }
+#donate-map .leaflet-container,
+.leaflet-pane,
+.leaflet-control,
+.leaflet-top,
+.leaflet-bottom {
+    z-index: 0 !important;   /* or 10 if you need some layering */
+}
+
+

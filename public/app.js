@@ -158,7 +158,26 @@ const pages = {
             </section>
         </div>
     `,
-
+    map:
+    `
+    <!-- Map Section -->
+    <div class="bg-white">
+<section id="donate-map" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-gray-900 mb-4">Find a Place To Donate</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          Find nearby NGOs and shelters to donate food. Every meal counts.
+        </p>
+      </div>
+  
+      <div class="bg-gray-100 rounded-3xl overflow-hidden shadow-2xl border border-gray-200">
+        <div id="map" class="w-full" style="height: 520px;"></div>
+      </div>
+    </div>
+  </section>
+  </div>
+    `,
     about: `
         <div class="bg-white">
             <!-- Hero Section -->
@@ -639,6 +658,8 @@ function router() {
             initializeGetStarted();
         } else if (hash === 'contact') {
             initializeContactForm();
+        }else if(hash =='map'){
+            InitializeMap();
         }
 
         // Scroll to top
@@ -744,6 +765,54 @@ function initializeMobileMenu() {
         });
     });
 }
+
+//Initialize Map
+function InitializeMap(){
+    // No DOMContentLoaded needed if script is at the bottom
+  const map = L.map('map').setView([19.0760, 72.8777], 10);
+  
+  // OpenStreetMap tiles (best free option)
+  L.tileLayer('https://api.maptiler.com/maps/streets-v4/{z}/{x}/{y}.png?key=PFSJWPHUrAyFzdfMhDsT', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19,
+  }).addTo(map);
+  
+  // Example donation points in Maharashtra
+  const donationPoints = [
+      {
+          lat: 19.0760,
+          lng: 72.8777,
+          name: "Help Foundation",
+          desc: "Mumbai Central - Food Donation Point"
+      },
+      {
+          lat: 18.5204,
+          lng: 73.8567,
+          name: "Akshaya Patra Foundation",
+          desc: "Pune - NGO Kitchen"
+      },
+      {
+          lat: 19.9975,
+          lng: 73.7898,
+          name: "Nashik Food Bank",
+          desc: "Daily donation drive"
+      },
+      {
+          lat: 21.1458,
+          lng: 79.0882,
+          name: "Nagpur Helpline",
+          desc: "Shelter & Food Distribution"
+      }
+  ];
+  
+  donationPoints.forEach(point => {
+      L.marker([point.lat, point.lng])
+          .addTo(map)
+  });
+  
+
+}
+
 
 // Initialize app
 window.addEventListener('hashchange', router);

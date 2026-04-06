@@ -6,7 +6,9 @@
     <title>THRIFTY FOODS - Food Wastage Control System</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/public/styles.css">
-
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>    
 </head>
 <body class="min-h-screen flex flex-col">
     <!-- Header -->
@@ -24,6 +26,7 @@
                 <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#home" class="nav-link text-gray-700 hover:text-green-600 transition-colors">Home</a>
+                    <a href="#map" class="nav-link text-gray-700 hover:text-green-600 transition-colors">Map</a>
                     <a href="#about" class="nav-link text-gray-700 hover:text-green-600 transition-colors">About</a>
                     <a href="#get-started" class="nav-link text-gray-700 hover:text-green-600 transition-colors">Get Started</a>
                     <a href="#contact" class="nav-link text-gray-700 hover:text-green-600 transition-colors">Contact</a>
@@ -53,7 +56,7 @@
     </header>
 
     <!-- Main Content -->
-    <main class="flex-1" id="app">
+    <main class="flex-1 z-0" id="app">
         <!-- Content will be dynamically loaded here -->
     </main>
 
@@ -78,7 +81,7 @@
                 <!-- Quick Links -->
                 <div>
                     <h3 class="text-white font-semibold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
+                    <ul class="space-y-2 z-50">
                         <li><a href="#home" class="text-sm hover:text-green-400 transition-colors">Home</a></li>
                         <li><a href="#about" class="text-sm hover:text-green-400 transition-colors">About Us</a></li>
                         <li><a href="#get-started" class="text-sm hover:text-green-400 transition-colors">Get Started</a></li>
@@ -156,5 +159,6 @@
     </footer>
 
     <script src="/app.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>
 </html>

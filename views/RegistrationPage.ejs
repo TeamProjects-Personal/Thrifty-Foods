@@ -6,6 +6,147 @@
   <title>Thrifty Foods - Create Account</title>
   <link rel="stylesheet" href="/public/RegForm.css">
 </head>
+<style>
+      
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0f2e9 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.registration-container {
+  background: white;
+  padding: 45px 35px;
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+              0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  max-width: 480px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.logo {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.logo h1 {
+  color: #16a34a;
+  font-size: 28px;
+  font-weight: 700;
+}
+.logo p {
+  color: #4b5563;
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+h2 {
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+.form-group {
+  margin-bottom: 22px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #374151;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+input, select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+}
+
+.password-container {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6b7280;
+  font-size: 18px;
+}
+
+button {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(22, 163, 74, 0.3);
+}
+
+.footer-text {
+  text-align: center;
+  margin-top: 25px;
+  color: #6b7280;
+  font-size: 14.5px;
+}
+
+.footer-text a {
+  color: #16a34a;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-text a:hover {
+  text-decoration: underline;
+}
+
+.registration-container {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.registration-container:hover {
+  transform: translateY(-5px);
+}
+
+</style>
+
 <body>
 
   <div class="registration-container">
@@ -17,7 +158,7 @@
 
     <h2>Create Your Account</h2>
 
-    <form id="registrationForm" method="post">
+    <form id="registrationForm">
       <div class="form-group">
         <label for="fullName">Full Name</label>
         <input type="text" id="fullName" placeholder="Enter your full name" required>
@@ -56,7 +197,7 @@
         </select>
       </div>
 
-      <button type="submit" >Create Account</button>
+      <button  type="button" onclick="RegistrationForm()" >Create Account</button>
     </form>
 
     <div class="footer-text">
@@ -64,7 +205,7 @@
     </div>
   </div>
   <script>
-    function RegistrationForm() {
+    async function RegistrationForm() {
     const fullName = document.getElementById('fullName').value.trim();
     const email = document.getElementById('email').value.trim();
     const phone = document.getElementById('phone').value.trim();
@@ -87,10 +228,32 @@
       return;
     }
 
-    alert("Registration Successful!\n\nWelcome to Thrifty Foods, " + fullName + "!\nYou registered as: " + userType);
+    const data = {
+      Name: fullName,
+      Email: email,
+      Phone: phone,
+      Password: password,
+      userType: userType,
+    };
 
+    try{
+      const response = await fetch("/submit",{
+        method: 'POST',
+        headers:{'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+
+      const result =response.data;
+      
+    }
+    catch(err){
+      console.log("error: "+err);
+    }
+
+    //alert("Registration Successful!\n\nWelcome to Thrifty Foods, " + fullName + "!\nYou registered as: " + userType);
 
     document.getElementById('registrationForm').reset();
+    
   }
 
 
@@ -107,12 +270,6 @@
     }
   }
 
-
-  document.getElementById('registrationForm').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      RegistrationForm();
-    }
-  });
   </script>
 </body>
 </html>
