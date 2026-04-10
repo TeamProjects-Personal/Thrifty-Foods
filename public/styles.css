@@ -83,6 +83,10 @@ a {
     100% { transform: rotate(360deg); }
 }
 
+.animate-spin-slow {
+    animation: spin 3s linear infinite;
+}
+
 /* User type card selection */
 .user-type-card {
     cursor: pointer;
